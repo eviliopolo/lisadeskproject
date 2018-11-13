@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <div class="card">
+    <div class="card">  
         <div class="card-body">
 
             <h4 class="font-weight-bold py-3 mb-4">Home One</h4>
