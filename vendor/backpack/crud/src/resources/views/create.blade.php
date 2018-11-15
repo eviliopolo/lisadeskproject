@@ -16,14 +16,18 @@
 
 @section('content')
 <div class="row">
-	<div class="col-md-8 col-md-offset-2">
+	<div class="col-lg-12">
+	<div class="card card-outline-info">
+				<div class="card-header">
+                <h4 class="m-b-0 text-white">Other Sample form</h4>
+        </div>
 		<!-- Default box -->
 		@if ($crud->hasAccess('list'))
 			<a href="{{ url($crud->route) }}" class="hidden-print"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
 		@endif
 
 		@include('crud::inc.grouped_errors')
-
+		<div class="card-body">
 		  <form method="post"
 		  		action="{{ url($crud->route) }}"
 				@if ($crud->hasUploadFields('create'))
@@ -31,27 +35,29 @@
 				@endif
 		  		>
 		  {!! csrf_field() !!}
-		  <div class="box">
+		  <div class="card-body">
 
 		    <div class="box-header with-border">
 		      <h3 class="box-title">{{ trans('backpack::crud.add_a_new') }} {{ $crud->entity_name }}</h3>
 		    </div>
-		    <div class="box-body row display-flex-wrap" style="display: flex; flex-wrap: wrap;">
+		    <div class="row p-t-20">
+						
 		      <!-- load the view from the application if it exists, otherwise load the one in the package -->
 		      @if(view()->exists('vendor.backpack.crud.form_content'))
 		      	@include('vendor.backpack.crud.form_content', [ 'fields' => $crud->getFields('create'), 'action' => 'create' ])
 		      @else
 		      	@include('crud::form_content', [ 'fields' => $crud->getFields('create'), 'action' => 'create' ])
-		      @endif
+					@endif
 		    </div><!-- /.box-body -->
 		    <div class="box-footer">
 
                 @include('crud::inc.form_save_buttons')
-
+			</div>
 		    </div><!-- /.box-footer-->
 
 		  </div><!-- /.box -->
-		  </form>
+			</form>
+		</div>
 	</div>
 </div>
 

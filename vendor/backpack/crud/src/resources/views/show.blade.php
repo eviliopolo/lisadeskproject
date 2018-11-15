@@ -42,7 +42,7 @@
 				@endif
 	    </div>
 	    <div class="box-body no-padding">
-			<table class="table table-striped table-bordered">
+			<table class="">
 		        <tbody>
 		        @foreach ($crud->columns as $column)
 		            <tr>
