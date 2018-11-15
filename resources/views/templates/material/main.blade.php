@@ -18,7 +18,7 @@
 
     @include('templates.application.includes.topbar')
 
-    @include('backpack::inc.sidebar')
+    @include('templates.material.left-sidebar')
 
     <div class="page-wrapper">
 

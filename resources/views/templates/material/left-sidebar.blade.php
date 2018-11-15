@@ -11,7 +11,7 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
 
-                <li>
+               <li>
                     <a class="has-arrow" href="#" aria-expanded="false">
                         <i class="mdi mdi-home"></i>
                         <span class="hide-menu">Starter Pages </span>
@@ -19,8 +19,13 @@
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ url('/home') }}">Home 1</a></li>
                         <li><a href="{{ url('/home-two') }}">Home 2</a></li>
+
+                        <li><a href="{{ backpack_url('user') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
+                        <li><a href="{{ backpack_url('role') }}"><i class="fa fa-group"></i> <span>Roles</span></a></li>
+                        <li><a href="{{ backpack_url('permission') }}"><i class="fa fa-key"></i> <span>Permissions</span></a></li>
                     </ul>
                 </li>
+
 
             </ul>
         </nav>

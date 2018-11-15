@@ -1,49 +1,45 @@
-@extends('templates.material.main')
+@extends('templates.application.master')
 
-@section('jquery') {{-- Including this section to override it empty. Using jQuery from webpack build --}} @endsection
+{{-- ### Attributes for Layout are added here ### --}}
+{{--Possibilities:  'fix-header'  'fix-sidebar' 'boxed' 'logo-center' 'single-column' --}}
+{{--You can make combinations with them--}}
+@section('body-classes','')
 
-@push('before-scripts')
-    <script src="{{ mix('/js/home-one.js') }}"></script>
-@endpush
+@section('template-css')
+    <link href="{{ mix('/css/material/style.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/colors/blue.css') }}" id="theme" rel="stylesheet">
+@endsection
 
-@section('content')
-    <div class="card">  
-        <div class="card-body">
+@section('template-custom-js')
+    <script src="/vendor/wrappixel/material-pro/4.1.0/material/js/custom.min.js"></script>
 
-            <h4 class="font-weight-bold py-3 mb-4">Home One</h4>
 
-            <p>This page is an example of basic layout to get you started.</p>
+    
+@endsection
 
-            <div class="w-100 p-3"></div>
+@section('layout-content')
 
-            <p>
-                <button class="btn btn-primary btn-lg">Button</button>
-            </p>
+    @include('templates.application.includes.topbar')
 
-            <div class="w-100 p-3"></div>
+    @include('templates.material.left-sidebar')
 
-            <div class="col-6">
-                @inject('itemsCarousel', 'carousel')
-                <carousel-component :items="{{ json_encode($itemsCarousel->get()) }}"></carousel-component>
-            </div>
+    <div class="page-wrapper">
 
-            <div class="w-100 p-3"></div>
+        <div class="container-fluid">
 
-            <alert-component></alert-component>
+            @if(true)
+                @include('templates.application.includes.breadcrumb')
+            @else
+                <div class="row mb-4"></div>
+            @endif
 
-            <alert-component>
-                Instead of default text, we can insert some we want
-            </alert-component>
+            @yield('content')
 
-            <alert-component variant="warning">
-                Also a prop to be used inside component
-            </alert-component>
-
-            <alert-component variant="danger">
-                And another prop
-            </alert-component>
+            @include('templates.application.includes.right-sidebar')
 
         </div>
+
     </div>
 
 @endsection
+

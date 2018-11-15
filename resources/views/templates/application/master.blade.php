@@ -6,16 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @if (config('backpack.base.meta_robots_content'))
+    <meta name="robots" content="{{ config('backpack.base.meta_robots_content', 'noindex, nofollow') }}">
+    @endif
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- Encrypted CSRF token for Laravel, in order for Ajax requests to work --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/vendor/wrappixel/material-pro/4.1.0/assets/images/favicon.png">
     {{--<link rel="icon" type="image/png" sizes="16x16" href="/vendor/wrappixel/material-pro/4.1.0/assets/images/favicon.png">--}}
-    <title>Material Pro Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
+    <title>
+      {{ isset($title) ? $title.' :: '.config('backpack.base.project_name').' Admin' : config('backpack.base.project_name').' Admin' }}
+    </title>
 
+    @yield('before-styles')
     @stack('before-styles')
 
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap Core CSS -->
     <link href="/vendor/wrappixel/material-pro/4.1.0/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Template CSS -->
@@ -40,7 +48,7 @@
     <script src="/vendor/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="/vendor/respondjs/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    @yield('after_styles')
     @stack('after-styles')
 
 </head>
@@ -55,7 +63,7 @@
 </div>
 
 <div id="main-wrapper">
-@yield('layout-content')
+    @yield('layout-content')
 </div>
 
 @stack('before-scripts')
@@ -96,6 +104,15 @@
 <!-- ============================================================== -->
 <script src="/vendor/wrappixel/material-pro/4.1.0/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 
+<!-- page script -->
+<script type="text/javascript">
+        // Ajax calls should always have the CSRF token attached to them, otherwise they won't work
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+    </script>
 
 @stack('after-scripts')
 
@@ -109,8 +126,12 @@
     gtag('config', '{{ config('app.google_analytics') }}');
 </script>
 
+     @include('backpack::inc.alerts')
 
-
+    @yield('after_scripts')
+    @stack('after_scripts')
+     <!-- JavaScripts -->
+     {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
 </body>
 
 </html>
