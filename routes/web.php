@@ -36,3 +36,6 @@ Route::get('/home', 'HomeController@index')->name('home-one');
 
 Route::get('/home-two', 'HomeController@homeTwo')->name('home-two');
 
+Route::get('/categories', 'CategoriesController@create');
+Route::post('/categories', 'CategoriesController@store');
+
