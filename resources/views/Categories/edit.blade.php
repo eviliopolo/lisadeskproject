@@ -34,7 +34,7 @@
                 <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />                              
                 <div class="form-group">
                     <label>Categoria</label>
-                    <input type="text" class="form-control" placeholder="Categoria" name="description">
+                    <input type="text" class="form-control" placeholder="Categoria" name="description" value="{!! $category->description !!}">
                 </div>
                
                 <div class="form-group row p-t-20">
@@ -43,14 +43,14 @@
                         <div class="demo-switch-title">Estado</div>
                             <div class="switch">
                                 <label>
-                                    <input name="visible" type="checkbox" checked ><span class="lever switch-col-light-blue"></span>
+                                    <input name="visible" type="checkbox" checked  {!! $category->estado?"checked":"" !!}><span class="lever switch-col-light-blue"></span>
                                 </label>
                             </div>
                         </div>                        
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
-                <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancelar</button>
+                
             </form>
         </div>
     </div>

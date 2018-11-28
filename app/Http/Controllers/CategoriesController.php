@@ -14,7 +14,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view ('categories.index',compact('categories'));
     }
 
     /**
@@ -39,6 +40,11 @@ class CategoriesController extends Controller
             'description'=>$request->get('description'),
             'visible'=>$request->get('visible')
         ));
+        
+        if ($category->visible == "on")
+            $category->visible  = 1;
+        else 
+            $category->visible  = 0;
         $category->save();
 
         return redirect ('/categories')->with('status','Nueva categoria creada');
@@ -52,7 +58,8 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::where('id', '=', $id)->firstOrFail();
+        return view('categories.show',compact('category'));
     }
 
     /**
@@ -63,7 +70,8 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::where('id', '=', $id)->firstOrFail();
+        return view('categories.edit',compact('category'));
     }
 
     /**
@@ -73,9 +81,22 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryFormRequest $request, $id)
     {
-        //
+        
+        
+        $descriptionnew = $request->get('description');
+        $visiblenew = $request->get('visible');
+        $category = Category::find($id);
+
+        $category->description = $descriptionnew;
+        $category->visible  = $visiblenew;
+
+        $category->Save();
+
+        return redirect ('/categories')->with('status','Categoria modificada');
+
+
     }
 
     /**
@@ -86,6 +107,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::where('id', '=', $id);
+        $category->delete();
+        return Redirect('/categories')->with('status','La categoria ' .$id . ' ha sido eliminada');
     }
 }

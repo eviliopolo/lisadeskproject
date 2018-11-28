@@ -36,6 +36,11 @@ Route::get('/home', 'HomeController@index')->name('home-one');
 
 Route::get('/home-two', 'HomeController@homeTwo')->name('home-two');
 
-Route::get('/categories', 'CategoriesController@create');
-Route::post('/categories', 'CategoriesController@store');
+Route::get('/categories', 'CategoriesController@index');
+Route::get('/categories/create', 'CategoriesController@create');
+Route::post('/categories/create', 'CategoriesController@store');
+Route::get('/categories/{id?}', 'CategoriesController@show');
+Route::get('/categories/{id?}/edit', 'CategoriesController@edit');
+Route::post('/categories/{id?}/edit', 'CategoriesController@update');
+Route::post('/categories/{id?}/delete', 'CategoriesController@destroy');
 
