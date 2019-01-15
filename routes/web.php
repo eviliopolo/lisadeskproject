@@ -30,7 +30,7 @@ Route::post('password/email', ['as' => 'password.email', function(){abort(499, '
 //Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
 
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('welcome');
 
 Route::get('/home', 'HomeController@index')->name('home-one');
 

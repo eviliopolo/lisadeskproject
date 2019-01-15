@@ -8,7 +8,7 @@ use Route;
 
 class BaseServiceProvider extends ServiceProvider
 {
-    const VERSION = '0.9.12';
+    const VERSION = '1.0.0';
 
     protected $commands = [
         \Backpack\Base\app\Console\Commands\Install::class,
@@ -16,6 +16,8 @@ class BaseServiceProvider extends ServiceProvider
         \Backpack\Base\app\Console\Commands\AddCustomRouteContent::class,
         \Backpack\Base\app\Console\Commands\Version::class,
         \Backpack\Base\app\Console\Commands\CreateUser::class,
+        \Backpack\Base\app\Console\Commands\PublishBackpackUserModel::class,
+        \Backpack\Base\app\Console\Commands\PublishBackpackMiddleware::class,
     ];
 
     /**
@@ -70,6 +72,7 @@ class BaseServiceProvider extends ServiceProvider
             'root'   => base_path(),
         ];
 
+        $this->addCustomAuthConfigurationValues();
         $this->registerMiddlewareGroup($this->app->router);
         $this->setupRoutes($this->app->router);
         $this->setupCustomRoutes($this->app->router);
@@ -83,6 +86,43 @@ class BaseServiceProvider extends ServiceProvider
     public function loadHelpers()
     {
         require_once __DIR__.'/helpers.php';
+    }
+
+    /**
+     * Backpack login differs from the standard Laravel login.
+     * As such, Backpack uses its own authentication provider, password broker and guard.
+     *
+     * This method adds those configuration values on top of whatever is in config/auth.php. Developers can overwrite the backpack provider, password broker or guard by adding a provider/broker/guard with the "backpack" name inside their config/auth.php file. Or they can use another provider/broker/guard entirely, by changing the corresponding value inside config/backpack/base.php
+     */
+    public function addCustomAuthConfigurationValues()
+    {
+        // add the backpack_users authentication provider to the configuration
+        app()->config['auth.providers'] = app()->config['auth.providers'] +
+        [
+            'backpack' => [
+                'driver'  => 'eloquent',
+                'model'   => config('backpack.base.user_model_fqn'),
+            ],
+        ];
+
+        // add the backpack_users password broker to the configuration
+        app()->config['auth.passwords'] = app()->config['auth.passwords'] +
+        [
+            'backpack' => [
+                'provider'  => 'backpack',
+                'table'     => 'password_resets',
+                'expire'    => 60,
+            ],
+        ];
+
+        // add the backpack_users guard to the configuration
+        app()->config['auth.guards'] = app()->config['auth.guards'] +
+        [
+            'backpack' => [
+                'driver'   => 'session',
+                'provider' => 'backpack',
+            ],
+        ];
     }
 
     /**
@@ -185,7 +225,11 @@ class BaseServiceProvider extends ServiceProvider
         $backpack_config_files = [__DIR__.'/config' => config_path()];
 
         // sidebar_content view, which is the only view most people need to overwrite
-        $backpack_sidebar_contents_view = [__DIR__.'/resources/views/inc/sidebar_content.blade.php' => resource_path('views/vendor/backpack/base/inc/sidebar_content.blade.php')];
+        $backpack_menu_contents_view = [
+            __DIR__.'/resources/views/inc/sidebar_content.blade.php'      => resource_path('views/vendor/backpack/base/inc/sidebar_content.blade.php'),
+            __DIR__.'/resources/views/inc/topbar_left_content.blade.php'  => resource_path('views/vendor/backpack/base/inc/topbar_left_content.blade.php'),
+            __DIR__.'/resources/views/inc/topbar_right_content.blade.php' => resource_path('views/vendor/backpack/base/inc/topbar_right_content.blade.php'),
+        ];
         $backpack_custom_routes_file = [__DIR__.$this->customRoutesFilePath => base_path($this->customRoutesFilePath)];
 
         // calculate the path from current directory to get the vendor path
@@ -200,7 +244,7 @@ class BaseServiceProvider extends ServiceProvider
             $backpack_public_assets,
             // $backpack_lang_files,
             $backpack_config_files,
-            $backpack_sidebar_contents_view,
+            $backpack_menu_contents_view,
             $backpack_custom_routes_file,
             $adminlte_assets,
             $gravatar_assets
@@ -210,7 +254,7 @@ class BaseServiceProvider extends ServiceProvider
         $this->publishes($backpack_config_files, 'config');
         $this->publishes($backpack_lang_files, 'lang');
         $this->publishes($backpack_base_views, 'views');
-        $this->publishes($backpack_sidebar_contents_view, 'sidebar_content');
+        $this->publishes($backpack_menu_contents_view, 'menu_contents');
         $this->publishes($error_views, 'errors');
         $this->publishes($backpack_public_assets, 'public');
         $this->publishes($backpack_custom_routes_file, 'custom_routes');

@@ -2,21 +2,14 @@
 
 <div @include('crud::inc.field_wrapper_attributes') >
     @include('crud::inc.field_translatable_icon')
-    <div class="checkbox checkbox-success">
+    <div class="checkbox">
     	<label>
-            
-         
-
-    	  <input type="hidden" name="{{ $field['name'] }}" value="1">
-          <input id="{{ $field['name'] }}" type="checkbox">
-          <label for="{{ $field['name'] }}"> {!! $field['label'] !!} </label>
-          </label>
-
-    	  <!-- <input type="checkbox" value="1"
+    	  <input type="hidden" name="{{ $field['name'] }}" value="0">
+    	  <input type="checkbox" value="1"
 
           name="{{ $field['name'] }}"
 
-          @if (old($field['name']) ?? $field['value'] ?? $field['default'] ?? false)
+          @if (old(square_brackets_to_dots($field['name'])) ?? $field['value'] ?? $field['default'] ?? false)
                  checked="checked"
           @endif
 
@@ -31,6 +24,6 @@
         {{-- HINT --}}
         @if (isset($field['hint']))
             <p class="help-block">{!! $field['hint'] !!}</p>
-        @endif -->
+        @endif
     </div>
 </div>
