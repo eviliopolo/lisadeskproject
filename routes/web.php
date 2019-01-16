@@ -44,3 +44,14 @@ Route::get('/categories/{id?}/edit', 'CategoriesController@edit');
 Route::post('/categories/{id?}/edit', 'CategoriesController@update');
 Route::post('/categories/{id?}/delete', 'CategoriesController@destroy');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('auth/{provider}', 'Auth\RegisterController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCallback');

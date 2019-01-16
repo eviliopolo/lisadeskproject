@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\SocialProvider;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Socialite;
 class RegisterController extends Controller
 {
     /*
@@ -69,4 +71,46 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback($provider)
+    {
+        try
+        {
+            $socialUser = Socialite::driver($provider)->user();
+        }
+        catch(\Exception $e)
+        {
+            return Redirect('/');
+        }
+        $socialProvider = SocialProvider::where('provider_id',$socialUser->getid())->first();
+        if (!$socialProvider)
+        {
+            $user = User::firstOrCreate([
+                'email' => $socialUser->getEmail(),
+                'name' => $socialUser->getName()
+            ]);
+
+            $user->socialProviders()->create(
+                ['provider' => $provider,'provider_id' => $socialUser->getid()]
+            );
+        }
+        else
+            $user= $socialProvider->user;
+        
+        auth()->login($user);
+        return redirect($this->redirectTo);
+        // $user->token;
+    }
+
+    
 }

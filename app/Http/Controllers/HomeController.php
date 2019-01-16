@@ -13,11 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        /**
-         * Just for testing Vue components
-         */
         $this->middleware('auth');
-//        \Auth::loginUsingId(1);
     }
 
     /**
@@ -27,16 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
-    }
-
-    public function homeOne()
-    {
-        return view('home-one');
-    }
-
-    public function homeTwo()
-    {
-        return view('home-two');
+        return view('home');
     }
 }
