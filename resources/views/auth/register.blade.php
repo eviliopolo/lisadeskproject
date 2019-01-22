@@ -1,5 +1,5 @@
-@extends('layouts.app')
-
+@extends('shared.master')
+@section('title','Registrese')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
