@@ -1,31 +1,60 @@
+@extends('templates.application.master')
 
-@extends('shared.master')
-@section('title','Login')
+@section('template-custom-js')
+
+    <script src="/vendor/wrappixel/material-pro/4.1.0/material/js/custom.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#back-to-login").click(function () {
+                $("#loginform").slideDown()
+                $("#recoverform").fadeOut()
+            })
+        })
+    </script>
+
+@endsection
+
+@section('layout-content')
 
 
 
-@section('content')
-
-<body class="text-center">
-    
-        
-            <form class="form-signin" id="loginform" method="POST" action="{{ route('login') }}">
+<section id="wrapper" class="login-register login-sidebar" style="background-image:url(/vendor/wrappixel/material-pro/4.1.0/assets/images/background/login-register.jpg);">
+    <div class="login-box card">
+        <div class="card-body">
+            <form class="form-horizontal form-material" id="loginform" method="POST" action="{{ route('login') }}">
                 @csrf
-                <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input id="email" type="email" placeholder="Email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input id="password" type="password" placeholder="Password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-                <div class="checkbox mb-3">
-                    <label>
+                <a href="javascript:void(0)" class="text-center db">
+                    <img src="/vendor/wrappixel/material-pro/4.1.0/assets/images/logo-icon.png" alt="Home" />
+                    <br/>
+                    <img src="/vendor/wrappixel/material-pro/4.1.0/assets/images/logo-text.png" alt="Home" />
+                </a>
+
+                <div class="form-group m-t-40">
+                    <div class="col-xs-12">
+                        <p> User: <b>admin@admin.com</b> </p>
+                        <p> Password: <b>admin</b> </p>
+                    </div>
+                </div>
+
+                <div class="form-group m-t-40">
+                    <div class="col-xs-12">
+                        <input id="email" type="email" placeholder="Email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input id="password" type="password" placeholder="Password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-primary pull-left p-t-0">
                             <input id="checkbox-signup" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
                             <label for="checkbox-signup"> {{ __('Remember Me') }} </label>
-                    </label>
-                    <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> {{ __('Forgot Your Password?') }}</a> </div>
-                </div>                
-                
-              
+                        </div>
+                        <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> {{ __('Forgot Your Password?') }}</a> </div>
+                </div>
                 <div class="form-group text-center m-t-20">
                     <div class="col-xs-12">
                         <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit"> {{ __('Login') }}</button>
@@ -41,16 +70,36 @@
                         <p>Don't have an account? <a href="{{ route('register') }}" class="text-primary m-l-5"><b>Sign Up</b></a></p>
                     </div>
                 </div>
-                <div class="col-md-6 col-md-offset-4">
-                <a href="{{ url('/auth/google') }}" class="btn btn-google"><i class="fa fa-google"></i> Google</a>
-                <a href="{{ url('/auth/twitter') }}" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
-                <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-        </div>
             </form>
-            
+            <form class="form-horizontal" id="recoverform" method="POST" action="{{ route('password.email') }}">
+                @csrf
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <h3>{{ __('Reset Password') }}</h3>
+                        <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input id="emailRecover" type="email" placeholder="Email"  class="form-control" name="email"  required>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit"> {{ __('Send Password Reset Link') }}</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <a href="javascript:void(0)" id="back-to-login" class="text-dark pull-right">
+                            <i class="fa fa-backward m-r-5"></i>
+                            Back to Login
+                        </a>
+                    </div>
+                </div>
+            </form>
 
-        
-    
+        </div>
+    </div>
+</section>
 
-</body>
-@endsection

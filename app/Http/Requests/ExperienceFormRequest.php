@@ -25,7 +25,7 @@ class ExperienceFormRequest extends FormRequest
     {
         return [
             'description' => 'required|min:5|max:255',
-            'visible' => 'required',
+            'unitValue' => 'required',
         ];
     }
 }

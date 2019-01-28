@@ -57,6 +57,6 @@ Route::get('auth/{provider}', 'Auth\RegisterController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCallback');
 
 
-Route::get('/experiencies/create', 'ExperienceController@create');
-Route::post('/experiencies/create', 'ExperienceController@store');
+Route::get('/experiences/create', 'ExperienceController@create');
+Route::post('/experiences/create', 'ExperienceController@store');
 Route::get('experiencieslist', 'ExperienceController@index');

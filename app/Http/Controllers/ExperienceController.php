@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\ExperienceFormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Experience;
 
 class ExperienceController extends Controller
@@ -22,22 +23,17 @@ class ExperienceController extends Controller
     {
         $experience = new Experience(array(
             'description'=>$request->get('description'),
-            'visible'=>$request->get('visible'),
+            'unitValue'=>$request->get('unitValue'),
             'file'=>$request->get('file'),
-        ));
-        
-        if ($experience->visible == "on")
-            $experience->visible  = 1;
-        else 
-            $experience->visible  = 0;
-        
-        $experience->pathImage  = "0";
+            'unitId' => 1
+        ));            
 
         $ruta = Storage::disk('public')->putFileAs('experiences',$request->file,'photo.jpg');        
+        $experience->pathImage  = $ruta;
                 
         $experience->save();
 
-        return redirect ('/experiences')->with('status','Nueva experiencia creada');
+        return redirect ('/categories')->with('status','Nueva experiencia creada');
     }
 
 

@@ -16,7 +16,7 @@
             <div class="row">
                 <div v-for="item in list" class="col-md-4">                             
                         <div  class="card mb-4 shadow-sm">
-                            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                            <img class="card-img-top" :src="getAvatar(item.pathImage)" v-bind:alt="pic">
                             <div class="card-body">
                                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -53,7 +53,7 @@
             infiniteHandler($state) {
                 let vm = this;
  
-                this.$http.get('/public/experiencieslist?page='+this.page)
+                this.$http.get('/experiencieslist?page='+this.page)
                     .then(response => {
                         return response.json();
                     }).then(data => {
@@ -64,6 +64,9 @@
                     });
  
                 this.page = this.page + 1;
+            },
+            getAvatar(avatar){
+                return "/storage/"+avatar;
             },
           },
     }

@@ -49470,7 +49470,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         infiniteHandler: function infiniteHandler($state) {
             var vm = this;
 
-            this.$http.get('/public/experiencieslist?page=' + this.page).then(function (response) {
+            this.$http.get('/experiencieslist?page=' + this.page).then(function (response) {
                 return response.json();
             }).then(function (data) {
                 $.each(data.data, function (key, value) {
@@ -49480,6 +49480,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
 
             this.page = this.page + 1;
+        },
+        getAvatar: function getAvatar(avatar) {
+            return "/storage/" + avatar;
         }
     }
 });
@@ -49508,11 +49511,7 @@ var render = function() {
                 _c("div", { staticClass: "card mb-4 shadow-sm" }, [
                   _c("img", {
                     staticClass: "card-img-top",
-                    attrs: {
-                      "data-src":
-                        "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
-                      alt: "Card image cap"
-                    }
+                    attrs: { src: _vm.getAvatar(item.pathImage), alt: _vm.pic }
                   }),
                   _vm._v(" "),
                   _c("div", { staticClass: "card-body" }, [
