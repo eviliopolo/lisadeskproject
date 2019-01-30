@@ -16,8 +16,9 @@ Vue.use(require('vue-resource'));
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('experience-list', require('./components/ExperienceList.vue'));
 Vue.component('InfiniteLoading', require('vue-infinite-loading'));
+Vue.component('plan-list', require('./components/PlanList.vue'));
 
 const app = new Vue({
     el: '#app'

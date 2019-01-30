@@ -2,10 +2,9 @@
 @extends('shared.master')
 @section('title','ejemplo')
 @section('content')
-    <div id="app">
-        
-        <example-component></example-component>
-        
+    <div id="app">        
+        <plan-list></plan-list>      
+        <experience-list></experience-list>                     
     </div>
 @endsection
     
