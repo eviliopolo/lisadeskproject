@@ -49564,7 +49564,7 @@ var staticRenderFns = [
     return _c("section", { staticClass: "jumbotron text-center" }, [
       _c("div", { staticClass: "container" }, [
         _c("h1", { staticClass: "jumbotron-heading" }, [
-          _vm._v("Album example")
+          _vm._v("Course example")
         ]),
         _vm._v(" "),
         _c("p", { staticClass: "lead text-muted" }, [
