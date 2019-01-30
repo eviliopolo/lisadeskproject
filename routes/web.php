@@ -60,3 +60,5 @@ Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCa
 Route::get('/experiences/create', 'ExperienceController@create');
 Route::post('/experiences/create', 'ExperienceController@store');
 Route::get('experiencieslist', 'ExperienceController@index');
+
+Route::get('list-plans', 'PlanController@listplans');

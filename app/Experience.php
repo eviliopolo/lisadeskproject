@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Experience extends Model
 {
     protected $fillable = [
-        'description', 'unitId','unitValue','pathImage'
+        'nombre','description', 'unitId','unitValue','pathImage'
     ];
 }
