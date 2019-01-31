@@ -14,13 +14,15 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('ld_theme/css/album.css')}} " rel="stylesheet">
-    <link href="{{asset('ld_theme/css/starter-template.css')}}" rel="stylesheet">
+    <link href="{{asset('ld_theme/css/offcanvas.css')}}" rel="stylesheet">
     
   </head>
 
-  <body>
-      @include('shared.navbar')
-      @yield('content')
+  <body class="bg-light">
+    <div id="app">  
+        @include('shared.navbar')
+        @yield('content')
+    </div>
     
 
     
@@ -34,6 +36,7 @@
     <script src=" {{ asset('ld_theme/js/popper.min.js') }}"></script>
     <script src=" {{ asset ('ld_theme/js/bootstrap.min.js')}}"></script>
     <script src=" {{ asset('ld_theme/js/holder.min.js') }}"></script>
+    <script src=" {{ asset('ld_theme/js/offcanvas.js') }}"></script>
     <script src="{{asset('js/app.js')}}" ></script>
 
 

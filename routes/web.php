@@ -61,4 +61,6 @@ Route::get('/experiences/create', 'ExperienceController@create');
 Route::post('/experiences/create', 'ExperienceController@store');
 Route::get('experiencieslist', 'ExperienceController@index');
 
+Route::get('/plans', 'PlanController@index');
 Route::get('list-plans', 'PlanController@listplans');
+Route::get('/shirts/{product}', 'PlanController@shirt')->name('shirt');
