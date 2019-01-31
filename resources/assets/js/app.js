@@ -43,7 +43,7 @@ const app = new Vue({
     computed: {
         cartTotal(){
             return this.cart.reduce((total, product) => {
-                return total + product.qty * product.price;
+                return total + product.qty * product.Value;
             }, 0);
         },
         totalItems(){

@@ -6,22 +6,23 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Qty</th>
-                    <th>size</th>
+                    <th>Plan</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
                 </tr>
                 </thead>
+                
                 <tbody>
                     <tr v-for="cartItem in cart">
-                    <td>{{cartItem.name}}</td>
-                    <td>{{cartItem.price}}</td>
+                    <td>{{cartItem.description}}</td>
+                    <td>{{cartItem.Value}}</td>
                     <td>
                         <button @click="removeFromCart(cartItem)" class="button alert tiny">-</button> <strong>{{cartItem.qty}}</strong> <button @click="addToCart(cartItem)" class="button success tiny">+</button>
 
                     </td>
                     <td>
-                          {{cartItem.size}}
+                          {{cartItem.Value * cartItem.qty}}
 
                     </td>
 

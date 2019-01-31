@@ -12,7 +12,7 @@
                         <ul class="list-unstyled mt-3 mb-4">
                         <p class="card-text">{{shirt.description}}</p>                       
                         </ul>
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Agregar al carrito</button>
+                        <button @click="addToCart" type="button" class="btn btn-lg btn-block btn-outline-primary">Agregar al carrito</button>
                     </div>
                 </div>
             </div>

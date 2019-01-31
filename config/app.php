@@ -164,6 +164,8 @@ return [
          * Package Service Providers...
          */
 
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -223,6 +225,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Solialite\Facades\Socialite::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
 
 
     ],

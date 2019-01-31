@@ -47811,7 +47811,7 @@ var app = new Vue({
     computed: {
         cartTotal: function cartTotal() {
             return this.cart.reduce(function (total, product) {
-                return total + product.qty * product.price;
+                return total + product.qty * product.Value;
             }, 0);
         },
         totalItems: function totalItems() {
@@ -49838,7 +49838,8 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-lg btn-block btn-outline-primary",
-                  attrs: { type: "button" }
+                  attrs: { type: "button" },
+                  on: { click: _vm.addToCart }
                 },
                 [_vm._v("Agregar al carrito")]
               )
@@ -50277,6 +50278,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['cart', 'carttotal', 'totalitems'],
@@ -50309,9 +50311,9 @@ var render = function() {
           [
             _vm._l(_vm.cart, function(cartItem) {
               return _c("tr", [
-                _c("td", [_vm._v(_vm._s(cartItem.name))]),
+                _c("td", [_vm._v(_vm._s(cartItem.description))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(cartItem.price))]),
+                _c("td", [_vm._v(_vm._s(cartItem.Value))]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -50346,7 +50348,7 @@ var render = function() {
                 _c("td", [
                   _vm._v(
                     "\n                      " +
-                      _vm._s(cartItem.size) +
+                      _vm._s(cartItem.Value * cartItem.qty) +
                       "\n\n                "
                   )
                 ])
@@ -50390,13 +50392,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Name")]),
+        _c("th", [_vm._v("Plan")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Price")]),
+        _c("th", [_vm._v("Precio")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Qty")]),
+        _c("th", [_vm._v("Cantidad")]),
         _vm._v(" "),
-        _c("th", [_vm._v("size")])
+        _c("th", [_vm._v("Total")])
       ])
     ])
   }

@@ -6,7 +6,7 @@
       <h1 class="display-4">Lucida</h1>
       <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It's built with default Bootstrap components and utilities with little customization.</p>
     </div>
-
+    
     <!-- Latest SHirts -->
     <div class="row">
         @forelse($plans->chunk(3) as $chunk)

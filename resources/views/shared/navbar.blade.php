@@ -41,14 +41,16 @@
         
         <a class="nav-link" href="#">Explore</a>
         <a class="nav-link" href="#">Suggestions</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Wish list</a>
+        <a class="nav-link" href="#"></a>
         <a class="nav-link" href="#">Link</a>
         <a class="nav-link" href="#">Link</a>
         <a class="nav-link" href="#">Link</a>
         <a class="nav-link" href="#">
-          Compras
-          <span class="badge badge-pill bg-light align-text-bottom">27</span>
+          Seedcoins
+          <span class="badge badge-pill bg-light align-text-bottom">2700</span>
         </a>
+
+        <cart-count  :cartcount="totalItems" > </cart-count>
       </nav>
     </div>
