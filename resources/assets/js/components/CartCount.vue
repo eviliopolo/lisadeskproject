@@ -1,13 +1,15 @@
 <template>
     <div>
-        <button data-open="checkoutDetailModal">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkoutDetailModal">
             <i class="fa fa-shopping-cart fa-2x" aria-hidden="true">
             </i>
             CART
             <span class="alert badge">
                     {{ cartcount }}
             </span>
-        </button>        
+        </button>
+
+        
 
     </div>
 </template>

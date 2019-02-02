@@ -64,3 +64,9 @@ Route::get('experiencieslist', 'ExperienceController@index');
 Route::get('/plans', 'PlanController@index');
 Route::get('list-plans', 'PlanController@listplans');
 Route::get('/shirts/{product}', 'PlanController@shirt')->name('shirt');
+
+//Route::get('checkout','CheckoutController@step1');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('shipping-info','CheckoutController@shipping')->name('checkout.shipping');
+    Route::resource('review','ProductReviewController');
+});

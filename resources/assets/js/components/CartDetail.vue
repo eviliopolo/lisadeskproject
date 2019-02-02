@@ -44,7 +44,7 @@
                 </tbody>
             </table>
 
-            <button class="button">Checkout</button>
+            
 
         </div>
     </div>
